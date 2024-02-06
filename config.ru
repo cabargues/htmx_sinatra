@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'bundler'
+require './app'
+require 'sequel'
 
 Bundler.require
 
@@ -15,6 +17,5 @@ options "*" do
   200
 end
 
-require './app'
-
-run Sinatra::Application
+# run OhPerations
+run OhPerations::Dispatcher

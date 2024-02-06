@@ -4,6 +4,7 @@ COMPOSE_FILES=-f docker-compose.yml
 
 up:
 	docker compose ${COMPOSE_FILES} up -d
+	docker compose ${COMPOSE_FILES_FULL} run --rm app bundle exec rake db:create db:seed
 
 down:
 	docker compose ${COMPOSE_FILES} down

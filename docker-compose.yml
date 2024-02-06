@@ -6,10 +6,11 @@ services:
     image: htmx-ruby
     volumes:
       - ".:/opt/server"
+      - "./tasks/payments.json:/opt/server/payments.json"
     ports:
       - "8080:8080"
-    env_file:
-      - .env
     expose:
       - "8080"
+    env_file:
+      - .env
     command: bundle exec rackup -p 8080 -o 0.0.0.0 config.ru

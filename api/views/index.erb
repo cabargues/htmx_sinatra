@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@latest"></script>
+  </head>
+  <body>
+    <h1>HTMX + Sinatra Demo </h1>
+      <%# <button class="bg-blue-500 p-2 m-2" hx-get="/payments" hx-target="#payments" hx-swap="innerHTML">
+        View All payments
+      </button> %>
+
+
+      <!-- Select with query params out of the box -->
+      <select name="status" hx-get="/payments" hx-target="#payments" hx-swap="innerHTML" hx-indicator=".htmx-indicator">
+        <option value="">All</option>
+        <option value="cancelled">Cancelled</option>
+        <option value="delivered">Delivered</option>
+      </select>
+
+      <button class="bg-blue-500 p-2 m-2" hx-post="/payments">
+        Add payment
+      </button>
+
+    <!--  Lazy loading -->
+    <div class="bg-blue-500 text-white p-4" id="payments" hx-get="/payments" hx-trigger="load">
+      <span class="htmx-indicator">Loading... </span>
+    </div>
+  </body>
+</html>
