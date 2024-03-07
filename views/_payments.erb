@@ -1,0 +1,23 @@
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" class="checkbox" />
+          </label>
+        </th>
+        <th>Reference</th>
+        <th>Beneficiary</th>
+        <th>User</th>
+        <th>Email</th>
+        <th>Amount from</th>
+        <th>Amount to</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= payments.map{ |p| erb :_payment, {locals: p}}.join %>
+    </tbody>
+  </table>
+</div>

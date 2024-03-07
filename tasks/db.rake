@@ -7,12 +7,16 @@ namespace :db do
   task :create do
     puts "================================"
     puts "=> CREATING DATABASE"
-    DB = Sequel.sqlite('database.db')
+    DB = Sequel.sqlite(ENV["DATABASE_PATH"])
     puts "==> OK"
 
     puts "=> DROPPING EXISTING TABLES"
-    DB.run "DROP TABLE payments"
-    puts "==> OK"
+    begin
+      DB.run "DROP TABLE payments"
+      puts "==> OK"
+    rescue
+      puts "==> OK (No previous database)"
+    end
 
     puts "=> CREATING TABLES"
     puts "==> Creating table payments"

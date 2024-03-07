@@ -1,0 +1,49 @@
+<tr>
+  <th>
+    <label>
+      <input type="checkbox" class="checkbox" />
+    </label>
+  </th>
+  <td>
+    <%= reference %>
+    <br/>
+    <% case status when "pending"%>
+      <span class="badge badge-ghost badge-sm bg-gray-500 text-white"> <%= status %></span>
+    <%when "received"%>
+      <span class="badge badge-ghost badge-sm bg-blue-500 text-white"> <%= status %></span>
+    <%when "verifying"%>
+      <span class="badge badge-ghost badge-sm bg-yellow-500 text-white"> <%= status %></span>
+    <%when "verified"%>
+      <span class="badge badge-ghost badge-sm bg-teal-500 text-white"> <%= status %></span>
+    <%when "cancelled"%>
+      <span class="badge badge-ghost badge-sm bg-rose-500 text-white"> <%= status %></span>
+    <%when "delivered"%>
+      <span class="badge badge-ghost badge-sm bg-green-500 text-white"> <%= status %></span>
+    <% end %>
+  </td>
+  <td>
+    <span><%= beneficiary_name %></span>
+  </td>
+  <td>
+    <div class="flex items-center gap-3">
+      <div class="avatar">
+        <div class="mask mask-squircle">
+          <ion-icon name="cash-outline"></ion-icon>
+        </div>
+      </div>
+      <div>
+        <div class="font-bold"><%= sender_name %></div>
+        <div class="text-sm opacity-50"><%= sender_country %></div>
+      </div>
+    </div>
+  </td>
+  <td>
+    <span><%= sender_email %></span>
+  </td>
+  <td>
+    <span><%= amount_from %> <%= currency_from %></span>
+  </td>
+  <td>
+    <span><%= amount_to %> <%= currency_to %></span>
+  </td>
+</tr>

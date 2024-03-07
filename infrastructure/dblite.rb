@@ -8,7 +8,7 @@ module Infrastructure
     def self.client
       return @client if defined? @client
 
-      @client = Sequel.sqlite('database.db', loggers: [Logger.new($stodout)])
+      @client = Sequel.sqlite(ENV["DATABASE_PATH"], loggers: [Logger.new($stodout)])
     end
   end
 end

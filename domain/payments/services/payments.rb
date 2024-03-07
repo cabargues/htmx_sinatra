@@ -20,6 +20,10 @@ module Domain
           def create(payment)
             Repositories::Payments.create(payment)
           end
+
+          def search(search_term)
+            Repositories::Payments.search(search_term)
+          end
         end
       end
     end

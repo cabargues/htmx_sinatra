@@ -28,11 +28,26 @@ module Domain
             parse_payments(result)
           end
 
+          def search(search_term)
+            puts search_term
+            result = dataset.where(
+              Sequel.like(:reference, "%#{search_term}%"))
+                .or(Sequel.like(:sender_email, "%#{search_term}%"))
+                .or(Sequel.like(:sender_name, "%#{search_term}%"))
+                .or(Sequel.like(:sender_country, "%#{search_term}%"))
+                .or(Sequel.like(:beneficiary_name, "%#{search_term}%"))
+            .order(:created_at)
+            return unless result
+            puts result
+            parse_payments(result)
+          end
+
           def create(payment)
             dataset.insert(payment.to_h)
 
             fetch_by_reference(payment.reference)
           end
+
 
 
           # def update(payment)
