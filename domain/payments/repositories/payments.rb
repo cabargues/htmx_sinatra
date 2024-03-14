@@ -22,23 +22,44 @@ module Domain
           end
 
           def fetch_all_by_status(status)
-            result = dataset.where(status: status).order(:created_at)
+            if status.nil? || status.empty?
+              result = dataset.all
+            else
+              result = dataset.where(status: status).order(:created_at)
+            end
             return unless result
 
             parse_payments(result)
           end
 
-          def search(search_term)
-            puts search_term
-            result = dataset.where(
-              Sequel.like(:reference, "%#{search_term}%"))
-                .or(Sequel.like(:sender_email, "%#{search_term}%"))
-                .or(Sequel.like(:sender_name, "%#{search_term}%"))
-                .or(Sequel.like(:sender_country, "%#{search_term}%"))
-                .or(Sequel.like(:beneficiary_name, "%#{search_term}%"))
-            .order(:created_at)
+          def search(criteria)
+            search_term = criteria[:search]
+            status = criteria[:status]
+
+            unless status.nil? || status.empty?
+              result = dataset.where(
+                Sequel[status: status] & (
+                  (Sequel.ilike(:reference, "%#{search_term}%")) |
+                  (Sequel.ilike(:sender_email, "%#{search_term}%")) |
+                  (Sequel.ilike(:sender_name, "%#{search_term}%")) |
+                  (Sequel.ilike(:sender_country, "%#{search_term}%")) |
+                  (Sequel.ilike(:beneficiary_name, "%#{search_term}%"))
+                  )
+                ).order(:created_at)
+            else
+              result = dataset.where(
+                Sequel.ilike(:reference, "%#{search_term}%"))
+                .or(Sequel.ilike(:sender_email, "%#{search_term}%"))
+                .or(Sequel.ilike(:sender_name, "%#{search_term}%"))
+                .or(Sequel.ilike(:sender_country, "%#{search_term}%"))
+                .or(Sequel.ilike(:beneficiary_name, "%#{search_term}%"))
+                .order(:created_at)
+            end
+
+
+
             return unless result
-            puts result
+
             parse_payments(result)
           end
 
@@ -48,6 +69,14 @@ module Domain
             fetch_by_reference(payment.reference)
           end
 
+
+          def count_all_by_status(status)
+            if status.nil? || status.empty?
+              result = dataset.all.count
+            else
+              result = dataset.where(status: status).count
+            end
+          end
 
 
           # def update(payment)

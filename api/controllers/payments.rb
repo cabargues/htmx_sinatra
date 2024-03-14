@@ -6,41 +6,64 @@ module Api
   module Controllers
     class Payments < Base
       get '/' do
-        payments = get_payment_list(params['status'])
+        status = params['status']
+
+        erb :app_layout do
+          erb :_payments, {locals: { status: status }} # do
+        end
+      end
+
+      get '/list' do
+        sleep(rand(2.0))
+        status = params['status']
+        payments = get_payments_list_by(status)
 
         payments_list = payments.map do |payment|
           payment.to_h
         end
 
-        erb :_payments, { locals: { payments: payments_list } }
+        erb :_payments_list, { locals: { payments: payments_list } }, :layout => false
+      end
+
+      get '/count' do
+        sleep(rand(2.0))
+        status = params['status']
+        payments_count = get_payments_count_by(status)
+
+        erb :_pooler, { locals: { count: payments_count, status: status } }, :layout => false
       end
 
       post '/search' do
-        payments = search_payment_list(params['search'])
+        criteria = {
+          search: params['search'],
+          status: params['status']
+        }
+        payments = search_payment_list(criteria)
+
 
         payments_list = payments.map do |payment|
           payment.to_h
         end
 
-        erb :_payments, { locals: { payments: payments_list } }
+        erb :_payments_list, { locals: { payments: payments_list } }
       end
 
       private
 
-      def get_payment_list(status)
-        if status.nil? || status.empty?
-          Domain::Payments::Services::Payments.fetch_all
-        else
-          Domain::Payments::Services::Payments.fetch_all_by_status(status)
-        end
+      def get_payments_list_by(status)
+        Domain::Payments::Services::Payments.fetch_all_by_status(status)
       end
 
       def get_payment(reference)
         Domain::Payments::Services::Payments.fetch_by_reference(reference)
       end
 
-      def search_payment_list(search)
-        Domain::Payments::Services::Payments.search(search)
+      def search_payment_list(criteria)
+        Domain::Payments::Services::Payments.search(criteria)
+      end
+
+      def get_payments_count_by(status)
+        Domain::Payments::Services::Payments.count_all_by_status(status)
       end
     end
   end

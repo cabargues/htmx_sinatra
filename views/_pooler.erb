@@ -1,0 +1,11 @@
+<p
+  class="text-xs text-gray-500 dark:text-gray-400"
+  hx-trigger="load delay:10s"
+  hx-get="/payments/count?status=<%= status %>"
+  hx-swap="outerHTML"
+  hx-indicator=".htmx-indicator transition:true"
+>
+  <span><%= count %> payments
+    <img class="htmx-indicator max-h-2" src="images/bars.svg"/></img>
+</span>
+</p>
