@@ -1,155 +1,169 @@
-<div class="h-screen py-8 overflow-y-auto bg-white border-l border-r sm:w-64 w-60 dark:bg-gray-900 dark:border-gray-700">
-  <h2 class="px-5 text-lg font-medium text-gray-800 dark:text-blue-300">Payments</h2>
-  <div class="mt-8 space-y-4">
-    <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if !status %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2  focus:outline-none" href="/payments">
-      <div class="relative">
-        <span class="h-2 w-2 rounded-full bg-white absolute right-0.5 ring-1 ring-white bottom-0"></span>
-      </div>
-      <div class="text-left rtl:text-right">
-        <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">All</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400"
-          hx-get="/payments/count"
-          hx-trigger="load delay:1s"
-          hx-swap="outerHTML"
-          hx-indicator=".htmx-indicator-counter"
-        >
-          <span>Counting ... </span>
-          <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
-        </p>
-      </div>
-    </a>
-    <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'pending' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=pending">
-      <div class="relative">
-        <span class="h-2 w-2 rounded-full bg-gray-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
-      </div>
-      <div class="text-left rtl:text-right">
-        <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Pending</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400"
-            hx-get="/payments/count?status=pending"
-            hx-trigger="load delay:1s"
-            hx-swap="outerHTML"
-            hx-indicator=".htmx-indicator-counter"
-          >
-          <span>Counting ... </span>
-          <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
-        </p>
-      </div>
-    </a>
-    <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'received' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=received">
-      <div class="relative">
-        <span class="h-2 w-2 rounded-full bg-blue-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
-      </div>
-      <div class="text-left rtl:text-right">
-        <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Received</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400"
+<%# <div class="drawer drawer-end">
+  <input id="my-drawer-4" type="checkbox" class="drawer-toggle">
+  <div class="drawer-content p-0 m-0"> %>
+    <div class="h-screen py-8 overflow-y-auto bg-white border-l border-r sm:w-64 w-60 dark:bg-gray-900 dark:border-gray-700">
+      <h2 class="px-5 text-lg font-medium text-gray-800 dark:text-blue-300">Payments</h2>
+      <div class="mt-8 space-y-4">
+        <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if !status %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2  focus:outline-none" href="/payments">
+          <div class="relative">
+            <span class="h-2 w-2 rounded-full bg-white absolute right-0.5 ring-1 ring-white bottom-0"></span>
+          </div>
+          <div class="text-left rtl:text-right">
+            <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">All</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400"
+              hx-get="/payments/count"
+              hx-trigger="load delay:1s"
+              hx-swap="outerHTML"
+              hx-indicator=".htmx-indicator-counter"
+            >
+              <span>Counting ... </span>
+              <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
+            </p>
+          </div>
+        </a>
+        <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'pending' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=pending">
+          <div class="relative">
+            <span class="h-2 w-2 rounded-full bg-gray-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
+          </div>
+          <div class="text-left rtl:text-right">
+            <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Pending</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400"
+                hx-get="/payments/count?status=pending"
+                hx-trigger="load delay:1s"
+                hx-swap="outerHTML"
+                hx-indicator=".htmx-indicator-counter"
+              >
+              <span>Counting ... </span>
+              <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
+            </p>
+          </div>
+        </a>
+        <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'received' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=received">
+          <div class="relative">
+            <span class="h-2 w-2 rounded-full bg-blue-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
+          </div>
+          <div class="text-left rtl:text-right">
+            <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Received</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400"
 
-          hx-get="/payments/count?status=received"
-          hx-trigger="load delay:1s"
-          hx-swap="outerHTML"
-          hx-indicator=".htmx-indicator-counter"
-        >
-          <span>Counting ... </span>
-          <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
-        </p>
+              hx-get="/payments/count?status=received"
+              hx-trigger="load delay:1s"
+              hx-swap="outerHTML"
+              hx-indicator=".htmx-indicator-counter"
+            >
+              <span>Counting ... </span>
+              <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
+            </p>
+          </div>
+        </a>
+        <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'verifying' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=verifying">
+          <div class="relative">
+            <span class="h-2 w-2 rounded-full bg-yellow-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
+          </div>
+          <div class="text-left rtl:text-right">
+            <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Verifying</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400"
+              hx-get="/payments/count?status=verifying"
+                hx-trigger="load delay:1s"
+                hx-swap="outerHTML"
+                hx-indicator=".htmx-indicator-counter"
+            >
+              <span>Counting ... </span>
+              <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
+            </p>
+          </div>
+        </a>
+        <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'verified' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=verified">
+          <div class="relative">
+            <span class="h-2 w-2 rounded-full bg-teal-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
+          </div>
+          <div class="text-left rtl:text-right">
+            <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Verified</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400"
+              hx-get="/payments/count?status=verified"
+                hx-trigger="load delay:1s"
+                hx-swap="outerHTML"
+                hx-indicator=".htmx-indicator-counter"
+            >
+              <span>Counting ... </span>
+              <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
+            </p>
+          </div>
+        </a>
+        <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'delivered' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=delivered">
+          <div class="relative">
+            <span class="h-2 w-2 rounded-full bg-green-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
+          </div>
+          <div class="text-left rtl:text-right">
+            <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Delivered</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400"
+              hx-get="/payments/count?status=delivered"
+              hx-trigger="load delay:1s"
+              hx-swap="outerHTML"
+              hx-indicator=".htmx-indicator"
+            >
+              <span>Counting ... </span>
+              <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
+            </p>
+          </div>
+        </a>
+        <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'cancelled' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=cancelled">
+          <div class="relative">
+            <span class="h-2 w-2 rounded-full bg-rose-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
+          </div>
+          <div class="text-left rtl:text-right">
+            <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Cancelled</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400"
+              hx-get="/payments/count?status=cancelled"
+              hx-trigger="load delay:1s"
+              hx-swap="outerHTML"
+              hx-indicator=".htmx-indicator"
+            >
+              <span>Counting ... </span>
+              <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
+            </p>
+          </div>
+        </a>
       </div>
-    </a>
-    <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'verifying' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=verifying">
-      <div class="relative">
-        <span class="h-2 w-2 rounded-full bg-yellow-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
-      </div>
-      <div class="text-left rtl:text-right">
-        <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Verifying</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400"
-          hx-get="/payments/count?status=verifying"
-            hx-trigger="load delay:1s"
-            hx-swap="outerHTML"
-            hx-indicator=".htmx-indicator-counter"
-        >
-          <span>Counting ... </span>
-          <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
-        </p>
-      </div>
-    </a>
-    <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'verified' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=verified">
-      <div class="relative">
-        <span class="h-2 w-2 rounded-full bg-teal-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
-      </div>
-      <div class="text-left rtl:text-right">
-        <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Verified</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400"
-          hx-get="/payments/count?status=verified"
-            hx-trigger="load delay:1s"
-            hx-swap="outerHTML"
-            hx-indicator=".htmx-indicator-counter"
-        >
-          <span>Counting ... </span>
-          <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
-        </p>
-      </div>
-    </a>
-    <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'delivered' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=delivered">
-      <div class="relative">
-        <span class="h-2 w-2 rounded-full bg-green-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
-      </div>
-      <div class="text-left rtl:text-right">
-        <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Delivered</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400"
-          hx-get="/payments/count?status=delivered"
-          hx-trigger="load delay:1s"
-          hx-swap="outerHTML"
-          hx-indicator=".htmx-indicator"
-        >
-          <span>Counting ... </span>
-          <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
-        </p>
-      </div>
-    </a>
-    <a class="flex items-center w-full px-5 py-2 transition-colors duration-200 <%if status == 'cancelled' %> bg-gray-100 dark:bg-gray-800 <% else %> dark:hover:bg-gray-800 hover:bg-gray-100 <% end %>  gap-x-2 focus:outline-none" href="/payments?status=cancelled">
-      <div class="relative">
-        <span class="h-2 w-2 rounded-full bg-rose-500 absolute right-0.5 ring-1 ring-white bottom-0"></span>
-      </div>
-      <div class="text-left rtl:text-right">
-        <h1 class="text-sm font-medium text-gray-700 capitalize dark:text-white">Cancelled</h1>
-        <p class="text-xs text-gray-500 dark:text-gray-400"
-          hx-get="/payments/count?status=cancelled"
-          hx-trigger="load delay:1s"
-          hx-swap="outerHTML"
-          hx-indicator=".htmx-indicator"
-        >
-          <span>Counting ... </span>
-          <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
-        </p>
-      </div>
-    </a>
-  </div>
-</div>
-<div class="grid grid-cols-1 content-center w-screen">
-  <label class="input input-bordered flex items-center gap-2 m-4">
-    <input
-      id="search"
-      name="search"
-      type="text"
-      class="grow"
-      placeholder="Search"
-      hx-post="/payments/search"
-      hx-include="[name='status']"
-      hx-trigger="input changed delay:500ms, search"
-      hx-indicator=".htmx-indicator"
-      hx-target=".payments-list"
-      hx-swap="innerHTML transition:true"
-      />
-    <input id="status" name="status" type="hidden" value="<%= status %>"/>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
-  </label>
-  <div
-    class="payments-list h-screen overflow-y-auto p-8"
-    hx-trigger="load delay:100ms"
-    hx-get="/payments/list?status=<%=status%>"
-    hx-swap="innerHTMl transition:true"
-    hx-indicator=".htmx-indicator"
-    >
-    <div class="htmx-indicator flex justify-center">
-      <img class="max-h-24 m-32" src="images/audio.svg"/>
     </div>
+    <div class="grid grid-cols-1 content-center w-screen">
+      <%# <label for="my-drawer-4" class="drawer-button btn btn-primary">Open drawer</label> %>
+      <label class="input input-bordered flex items-center gap-2 m-4">
+        <input
+          id="search"
+          name="search"
+          type="text"
+          class="grow"
+          placeholder="Search"
+          hx-post="/payments/search"
+          hx-include="[name='status']"
+          hx-trigger="input changed delay:500ms, search"
+          hx-indicator=".htmx-indicator"
+          hx-target=".payments-list"
+          hx-swap="innerHTML transition:true"
+          />
+        <input id="status" name="status" type="hidden" value="<%= status %>"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
+      </label>
+      <div
+        class="payments-list h-screen overflow-y-auto p-8"
+        hx-trigger="load delay:100ms"
+        hx-get="/payments/list?status=<%=status%>"
+        hx-swap="innerHTMl transition:true"
+        hx-indicator=".htmx-indicator"
+        >
+        <div class="htmx-indicator flex justify-center">
+          <img class="max-h-24 m-32" src="images/audio.svg"/>
+        </div>
+      </div>
+    <%# </div>
   </div>
-</div>
+  <div class="drawer-side">
+    <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+      <!-- Sidebar content here -->
+      <li><a>Sidebar Item 1</a></li>
+      <li><a>Sidebar Item 2</a></li>
+    </ul>
+  </div>
+</div> %>

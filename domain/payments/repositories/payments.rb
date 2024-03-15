@@ -105,8 +105,10 @@ module Domain
               beneficiary_country: payment.beneficiary_country,
               cancellation_reason: payment.cancellation_reason,
               created_at: payment.created_at,
-              delivered_at: payment.delivered_at,
               received_at: payment.received_at,
+              verifying_at: payment.verifying_at,
+              verified_at: payment.verified_at,
+              delivered_at: payment.delivered_at,
               cancelled_at: payment.cancelled_at
             }
           end

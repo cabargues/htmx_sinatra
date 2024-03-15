@@ -33,6 +33,12 @@ module Api
         erb :_pooler, { locals: { count: payments_count, status: status } }, :layout => false
       end
 
+      get '/:reference' do
+        payment_details = get_payment(params["reference"])
+
+        erb :_payment_details, { locals: payment_details.to_h  }, :layout => false
+      end
+
       post '/search' do
         criteria = {
           search: params['search'],

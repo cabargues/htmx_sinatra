@@ -41,8 +41,10 @@ namespace :db do
       column :beneficiary_country, String
       column :cancellation_reason, String
       column :created_at, DateTime
-      column :delivered_at, DateTime
       column :received_at, DateTime
+      column :verifying_at, DateTime
+      column :verified_at, DateTime
+      column :delivered_at, DateTime
       column :cancelled_at, DateTime
     end
     puts "==> OK"
@@ -70,6 +72,53 @@ namespace :db do
 
   module Helper
     def self.create_payment(data)
+      case data[:status]
+      when 'pending'
+        created_at = data[:created_at]
+        received_at = nil
+        verifying_at = nil
+        verified_at = nil
+        delivered_at = nil
+        cancelled_at = nil
+      when 'received'
+        created_at = data[:created_at]
+        received_at = data[:received_at]
+        verifying_at = nil
+        verified_at = nil
+        delivered_at = nil
+        cancelled_at = nil
+      when 'verifying'
+        created_at = data[:created_at]
+        received_at = data[:received_at]
+        verifying_at = data[:received_at]
+        verified_at = nil
+        delivered_at = nil
+        cancelled_at = nil
+      when 'verified'
+        created_at = data[:created_at]
+        received_at = data[:received_at]
+        verifying_at = data[:received_at]
+        verified_at = data[:received_at]
+        delivered_at = nil
+        cancelled_at = nil
+      when 'delivered'
+        created_at = data[:created_at]
+        received_at = data[:received_at]
+        verifying_at = data[:received_at]
+        verified_at = data[:received_at]
+        delivered_at = data[:delivered_at]
+        cancelled_at = nil
+      when 'cancelled'
+        created_at = data[:created_at]
+        received_at = data[:received_at]
+        verifying_at = data[:received_at]
+        verified_at = data[:received_at]
+        delivered_at = data[:delivered_at]
+        cancelled_at = data[:cancelled_at]
+      else
+        puts "Unknown status"
+      end
+
       payment = Domain::Payments::Models::Payment.parse({
         reference: data[:reference],
         status: data[:status],
@@ -88,10 +137,12 @@ namespace :db do
         beneficiary_account: data[:beneficiary_account],
         beneficiary_country: data[:beneficiary_country],
         cancellation_reason: data[:cancellation_reason],
-        created_at: data[:created_at],
-        delivered_at: data[:delivered_at],
-        received_at: data[:received_at],
-        cancelled_at: data[:cancelled_at]
+        created_at: created_at,
+        received_at: received_at,
+        verifying_at: verifying_at,
+        verified_at: verified_at,
+        delivered_at: delivered_at,
+        cancelled_at: cancelled_at
       })
 
       Domain::Payments::Services::Payments.create(payment)

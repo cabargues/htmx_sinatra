@@ -1,5 +1,5 @@
 <div class="overflow-x-auto">
-  <table class="table">
+  <%# <table class="table">
     <!-- head -->
     <thead>
       <tr>
@@ -11,8 +11,8 @@
         <th>Amount to</th>
       </tr>
     </thead>
-    <tbody>
-      <%= payments.map{ |p| erb :_payment_list_item, {locals: p}}.join %>
-    </tbody>
-  </table>
+    <tbody> %>
+  <%= payments.map{ |p| erb :_payment_list_item, {locals: p}}.join %>
+  <%# </tbody> %>
+  <%# </table> %>
 </div>

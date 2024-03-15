@@ -1,0 +1,149 @@
+<div class="grid grid-cols-3 place-content-start place-items-start p-4 text-sm">
+  <div class="text-xl font-black pb-8 text-white">
+    <span><%= reference %></span>
+  </div>
+  <div class="col-span-2 grid grid-cols-3 gap-4 content-around place-content-center place-items-center text-lg font-bold">
+      <div class="text-white">
+        <%=amount_from%> <%=currency_from%>
+      </div>
+      <div class="text-xl">⇨</div>
+      <div class="text-white">
+        <%=amount_from%> <%=currency_from%>
+      </div>
+  </div>
+  <div class="row-span-3">
+    <ul class="steps steps-vertical text-xs">
+    <li
+      data-content="<%if created_at %> ✓ <%end %>"
+      class="step <%if created_at %> step-accent <%end %> ">
+      <div class="grid grid-cols-1 grid-rows-2 place-content-start place-items-start">
+        <div><span>Created</span></div>
+        <div><span><%=created_at%></span></div>
+      </div>
+    </li>
+    <li
+      data-content="<%if received_at %> ✓ <%end %>"
+      class="step <%if received_at %> step-accent <%end %> "
+      >
+      <div class="grid grid-cols-1 place-content-start place-items-start">
+        <div><span>Received</span></div>
+        <%if received_at%><div><span><%=received_at%></span></div><%end%>
+        <%if status == "pending" %><button class="btn btn-outline btn-accent btn-xs mt-2">Received</button><% end %>
+      </div>
+    </li>
+    <li
+      data-content="<%if verifying_at %> ✓ <%end %>"
+      class="step <%if verifying_at %> step-accent <%end %> "
+      >
+      <div class="grid grid-cols-1 place-content-start place-items-start">
+        <div><span>Verifying</span></div>
+        <%if verifying_at %><div><span><%=verifying_at%></span></div><%end%>
+        <%if status == "received" %><button class="btn btn-outline btn-accent btn-xs mt-2">Start verification</button><% end %>
+      </div>
+    </li>
+    <li
+      data-content="<%if verified_at %> ✓ <%end %>"
+      class="step <%if verified_at %> step-accent <%end %> "
+    >
+      <div class="grid grid-cols-1 place-content-start place-items-start">
+        <div><span>Verified</span></div>
+        <%if verified_at%><div><span><%=verified_at%></span></div><%end%>
+        <%if status == "verifying" %><button class="btn btn-outline btn-accent btn-xs mt-2">Complete verification</button><% end %>
+      </div>
+    </li>
+    <li
+      data-content="<%if delivered_at %> ✓ <%end %>"
+      class="step <%if delivered_at %> step-success <%end %> "
+    >
+      <div class="grid grid-cols-1place-content-start place-items-start">
+        <div><span>Delivered</span></div>
+        <%if delivered_at%><div><span><%=delivered_at%></span></div><%end%>
+        <%if status == "verified" %><button class="btn btn-outline btn-success btn-xs mt-2">Deliver</button><% end %>
+      </div>
+    </li>
+    <li
+      data-content="<%if cancelled_at %> ! <%end %>"
+      class="step <%if cancelled_at %> step-error <%end %> "
+    >
+      <div class="grid grid-cols-1 place-content-start place-items-start">
+        <div><span>Cancelled</span></div>
+        <%if cancelled_at%><div><span><%=cancelled_at%></span></div><%end%>
+        <%if status != "cancelled" %><button class="btn btn-outline btn-error btn-xs mt-2">Cancel</button><% end %>
+      </div>
+    </li>
+    </ul>
+  </div>
+  <div class="grid grid-cols-3">
+    <div class="col-span-3 uppercase font-black text-white pb-4">Sender details</div>
+    <div>
+      <span class="font-bold text-white">Name</span>
+    </div>
+    <div class="col-span-2">
+      <span><%=sender_name%></span>
+    </div>
+    <div>
+      <span class="font-bold text-white">Email</span>
+    </div>
+    <div class="col-span-2">
+      <span class="break-words"><%=sender_email%></span>
+    </div>
+    <div>
+      <span class="font-bold text-white">Address</span>
+    </div>
+    <div class="col-span-2">
+      <span><%=sender_address%></span>
+    </div>
+    <div>
+      <span class="font-bold text-white">State</span>
+    </div>
+    <div class="col-span-2">
+      <span><%=sender_state%></span>
+    </div>
+    <div>
+      <span class="font-bold text-white">Country</span>
+    </div>
+    <div class="col-span-2">
+      <span><%=sender_country%></span>
+    </div>
+  </div>
+  <div class="grid grid-cols-3">
+    <div class="col-span-3 uppercase font-black pb-4 text-white">Beneficiary details</div>
+    <div>
+      <span class="font-bold text-white">Code</span>
+    </div>
+    <div class="col-span-2">
+      <span><%=beneficiary_code%></span>
+    </div>
+    <div>
+      <span class="font-bold text-white">Name</span>
+    </div>
+    <div  class="col-span-2">
+      <span><%=beneficiary_name%></span>
+    </div>
+    <div>
+      <span class="font-bold text-white">Country</span>
+    </div>
+    <div  class="col-span-2">
+      <span><%=beneficiary_country%></span>
+    </div>
+    <div>
+      <span class="font-bold text-white">Account</span>
+    </div>
+    <div class="col-span-2">
+      <span><%=beneficiary_account%></span>
+    </div>
+  </div>
+  <div class="col-span-2">
+    <% if cancellation_reason %>
+      <div>
+        <span class="font-bold text-error">Cancellation reason</span>
+      </div>
+      <div>
+        <p><%= cancellation_reason %></p</div>
+      </div>
+    <%end%>
+  </div>
+  <div class="col-span-2">
+    ACTIONS
+  </div>
+</div>

@@ -29,8 +29,10 @@ module Domain
         attr_accessor :beneficiary_country
         attr_accessor :cancellation_reason
         attr_accessor :created_at
-        attr_accessor :delivered_at
         attr_accessor :received_at
+        attr_accessor :verifying_at
+        attr_accessor :verified_at
+        attr_accessor :delivered_at
         attr_accessor :cancelled_at
 
         def initialize(attrs = {})
@@ -52,8 +54,10 @@ module Domain
           @beneficiary_country = attrs[:beneficiary_country]
           @cancellation_reason = attrs[:cancellation_reason]
           @created_at = attrs[:created_at]
-          @delivered_at = attrs[:delivered_at]
           @received_at = attrs[:received_at]
+          @verifying_at = attrs[:verifying_at]
+          @verified_at = attrs[:verified_at]
+          @delivered_at = attrs[:delivered_at]
           @cancelled_at = attrs[:cancelled_at]
         end
 
@@ -87,8 +91,10 @@ module Domain
               beneficiary_country: payload.beneficiary_country,
               cancellation_reason: payload.cancellation_reason,
               created_at: payload.created_at,
-              delivered_at: payload.delivered_at,
               received_at: payload.received_at,
+              verifying_at: payload.verifying_at,
+              verified_at: payload.verified_at,
+              delivered_at: payload.delivered_at,
               cancelled_at: payload.cancelled_at
             )
           end
@@ -115,8 +121,10 @@ module Domain
               beneficiary_country: data[:beneficiary_country],
               cancellation_reason: data[:cancellation_reason],
               created_at: data[:created_at],
-              delivered_at: data[:delivered_at],
               received_at: data[:received_at],
+              verifying_at: data[:verifying_at],
+              verified_at: data[:verified_at],
+              delivered_at: data[:delivered_at],
               cancelled_at: data[:cancelled_at]
             )
           end
