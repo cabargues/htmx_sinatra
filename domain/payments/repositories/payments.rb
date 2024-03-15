@@ -78,10 +78,24 @@ module Domain
             end
           end
 
+          def update_payment_status(reference, status)
+            case status
+              when 'received'
+                dataset.where(reference: reference).update(status: status, received_at: DateTime.now)
+              when 'verifying'
+                dataset.where(reference: reference).update(status: status, verifying_at: DateTime.now)
+              when 'verified'
+                dataset.where(reference: reference).update(status: status, verified_at: DateTime.now)
+              when 'delivered'
+                dataset.where(reference: reference).update(status: status, delivered_at: DateTime.now)
+              when 'cancelled'
+                dataset.where(reference: reference).update(status: status, cancelled_at: DateTime.now)
+              else
+                puts "Unknown status"
+            end
 
-          # def update(payment)
-          #   # TODO:
-          # end
+            fetch_by_reference(reference)
+          end
 
           private
 

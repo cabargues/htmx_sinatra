@@ -39,6 +39,15 @@ module Api
         erb :_payment_details, { locals: payment_details.to_h  }, :layout => false
       end
 
+      post '/:reference/:status' do
+        reference = params["reference"]
+        status = params["status"]
+
+        payment_details = update_payment_status(reference, status)
+
+        erb :_payment_details, { locals: payment_details.to_h  }, :layout => false
+      end
+
       post '/search' do
         criteria = {
           search: params['search'],
@@ -70,6 +79,10 @@ module Api
 
       def get_payments_count_by(status)
         Domain::Payments::Services::Payments.count_all_by_status(status)
+      end
+
+      def update_payment_status(reference, status)
+        Domain::Payments::Services::Payments.update_payment_status(reference, status)
       end
     end
   end

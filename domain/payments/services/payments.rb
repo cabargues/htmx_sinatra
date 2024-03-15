@@ -24,6 +24,10 @@ module Domain
           def count_all_by_status(status)
             Repositories::Payments.count_all_by_status(status)
           end
+
+          def update_payment_status(reference, status)
+            Repositories::Payments.update_payment_status(reference, status)
+          end
         end
       end
     end

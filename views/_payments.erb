@@ -1,6 +1,3 @@
-<%# <div class="drawer drawer-end">
-  <input id="my-drawer-4" type="checkbox" class="drawer-toggle">
-  <div class="drawer-content p-0 m-0"> %>
     <div class="h-screen py-8 overflow-y-auto bg-white border-l border-r sm:w-64 w-60 dark:bg-gray-900 dark:border-gray-700">
       <h2 class="px-5 text-lg font-medium text-gray-800 dark:text-blue-300">Payments</h2>
       <div class="mt-8 space-y-4">
@@ -14,7 +11,7 @@
               hx-get="/payments/count"
               hx-trigger="load delay:1s"
               hx-swap="outerHTML"
-              hx-indicator=".htmx-indicator-counter"
+              hx-indicator=".htmx-indicator"
             >
               <span>Counting ... </span>
               <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
@@ -31,7 +28,7 @@
                 hx-get="/payments/count?status=pending"
                 hx-trigger="load delay:1s"
                 hx-swap="outerHTML"
-                hx-indicator=".htmx-indicator-counter"
+                hx-indicator=".htmx-indicator"
               >
               <span>Counting ... </span>
               <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
@@ -49,7 +46,7 @@
               hx-get="/payments/count?status=received"
               hx-trigger="load delay:1s"
               hx-swap="outerHTML"
-              hx-indicator=".htmx-indicator-counter"
+              hx-indicator=".htmx-indicator"
             >
               <span>Counting ... </span>
               <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
@@ -66,7 +63,7 @@
               hx-get="/payments/count?status=verifying"
                 hx-trigger="load delay:1s"
                 hx-swap="outerHTML"
-                hx-indicator=".htmx-indicator-counter"
+                hx-indicator=".htmx-indicator"
             >
               <span>Counting ... </span>
               <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
@@ -83,7 +80,7 @@
               hx-get="/payments/count?status=verified"
                 hx-trigger="load delay:1s"
                 hx-swap="outerHTML"
-                hx-indicator=".htmx-indicator-counter"
+                hx-indicator=".htmx-indicator"
             >
               <span>Counting ... </span>
               <img class="htmx-indicator max-h-2" src="images/bars.svg"/>
@@ -156,14 +153,3 @@
           <img class="max-h-24 m-32" src="images/audio.svg"/>
         </div>
       </div>
-    <%# </div>
-  </div>
-  <div class="drawer-side">
-    <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-      <!-- Sidebar content here -->
-      <li><a>Sidebar Item 1</a></li>
-      <li><a>Sidebar Item 2</a></li>
-    </ul>
-  </div>
-</div> %>

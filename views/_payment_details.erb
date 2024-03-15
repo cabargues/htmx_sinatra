@@ -28,7 +28,12 @@
       <div class="grid grid-cols-1 place-content-start place-items-start">
         <div><span>Received</span></div>
         <%if received_at%><div><span><%=received_at%></span></div><%end%>
-        <%if status == "pending" %><button class="btn btn-outline btn-accent btn-xs mt-2">Received</button><% end %>
+        <%if status == "pending" %>
+          <button
+            class="btn btn-outline btn-accent btn-xs mt-2"
+            hx-post="payments/<%=reference%>/received"
+          >Received</button>
+        <% end %>
       </div>
     </li>
     <li
@@ -38,7 +43,12 @@
       <div class="grid grid-cols-1 place-content-start place-items-start">
         <div><span>Verifying</span></div>
         <%if verifying_at %><div><span><%=verifying_at%></span></div><%end%>
-        <%if status == "received" %><button class="btn btn-outline btn-accent btn-xs mt-2">Start verification</button><% end %>
+        <%if status == "received" %>
+          <button
+            class="btn btn-outline btn-accent btn-xs mt-2"
+            hx-post="payments/<%=reference%>/verifying"
+          >Start verification</button>
+        <% end %>
       </div>
     </li>
     <li
@@ -48,7 +58,12 @@
       <div class="grid grid-cols-1 place-content-start place-items-start">
         <div><span>Verified</span></div>
         <%if verified_at%><div><span><%=verified_at%></span></div><%end%>
-        <%if status == "verifying" %><button class="btn btn-outline btn-accent btn-xs mt-2">Complete verification</button><% end %>
+        <%if status == "verifying" %>
+          <button
+            class="btn btn-outline btn-accent btn-xs mt-2"
+            hx-post="payments/<%=reference%>/verified">
+          Complete verification</button>
+        <% end %>
       </div>
     </li>
     <li
@@ -58,7 +73,12 @@
       <div class="grid grid-cols-1place-content-start place-items-start">
         <div><span>Delivered</span></div>
         <%if delivered_at%><div><span><%=delivered_at%></span></div><%end%>
-        <%if status == "verified" %><button class="btn btn-outline btn-success btn-xs mt-2">Deliver</button><% end %>
+        <%if status == "verified" %>
+          <button
+            class="btn btn-outline btn-success btn-xs mt-2"
+            hx-post="payments/<%=reference%>/delivered"
+          >Deliver</button>
+        <% end %>
       </div>
     </li>
     <li
@@ -68,7 +88,12 @@
       <div class="grid grid-cols-1 place-content-start place-items-start">
         <div><span>Cancelled</span></div>
         <%if cancelled_at%><div><span><%=cancelled_at%></span></div><%end%>
-        <%if status != "cancelled" %><button class="btn btn-outline btn-error btn-xs mt-2">Cancel</button><% end %>
+        <%if status != "cancelled" %>
+          <button
+            class="btn btn-outline btn-error btn-xs mt-2"
+            hx-post="payments/<%=reference%>/cancelled"
+          >Cancel</button>
+        <% end %>
       </div>
     </li>
     </ul>
@@ -142,8 +167,5 @@
         <p><%= cancellation_reason %></p</div>
       </div>
     <%end%>
-  </div>
-  <div class="col-span-2">
-    ACTIONS
   </div>
 </div>
