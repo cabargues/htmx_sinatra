@@ -34,12 +34,14 @@ module Api
       end
 
       get '/:reference' do
+        sleep(rand(2.0))
         payment_details = get_payment(params["reference"])
 
         erb :_payment_details, { locals: payment_details.to_h  }, :layout => false
       end
 
       post '/:reference/:status' do
+        sleep(rand(2.0))
         reference = params["reference"]
         status = params["status"]
 
@@ -49,6 +51,7 @@ module Api
       end
 
       post '/search' do
+        sleep(rand(2.0))
         criteria = {
           search: params['search'],
           status: params['status']

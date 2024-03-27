@@ -1,12 +1,10 @@
 <div class="collapse collapse-arrow border border-base-300 rounded-none"
     hx-get="/payments/<%=reference%>"
     hx-target=".payment_details_<%=reference%>"
-    hx-swap="innerHTML">
+    hx-swap="innerHTML"
+    htx-indicator=".htmx-indicator-<%=reference%>">
   <input type="radio" name="my-accordion-payment"/>
-  <div
-    class="grid grid-cols-6 text-sm collapse-title"
-
-  >
+  <div class="grid grid-cols-6 text-sm collapse-title">
     <div>
       <span class="font-bold"><%= reference %></span><br/>
       <% case status when "pending"%>
@@ -50,5 +48,8 @@
     </div>
   </div>
   <div class="collapse-content bg-base-200 payment_details_<%=reference%>">
+    <div class="htmx-indicator-<%=reference%> grid w-full place-content-center place-items-center p-8">
+      <img class="max-h-12" src="images/bars.svg"/></img>
   </div>
+</div>
 </div>
